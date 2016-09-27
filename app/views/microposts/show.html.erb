@@ -4,6 +4,9 @@
   <%= link_to gravatar_for(@post.user, size: 50), @post.user %>
   <span class="user"><%= link_to @post.user.name, @post.user %></span>
   <span class="title"><h4><%= link_to @post.title, @post %></h4></span>
+  <span class="content"><h4><%= @post.content %> </h4>
+  <%= image_tag @post.picture.url if @post.picture? %>
+  </span>
 
   <span class="timestamp">
     Posted <%= time_ago_in_words(@post.created_at) %> ago.
@@ -25,7 +28,7 @@
   </div>
   <br>
   <br>
-  <%= f.submit "Post", class: "btn btn-primary" %>
+  <%= f.submit "Comment", class: "btn btn-primary" %>
 <% end %>
 <% end %>
 

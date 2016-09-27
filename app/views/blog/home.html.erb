@@ -29,7 +29,6 @@
   <span class="user"><%= link_to post.user.name, user_path(post.user.id) %></span>
   <span class="title"><h4>Title: <%= link_to post.title, micropost_path(post.id) %></h4></span>
   <span class="content"><%= post.content %><strong><%= link_to "READ MORE", micropost_path(post.id) %></strong></span>
-  <span class="comment"><%= post.content %><strong><%= link_to " Comment", micropost_path(post.id) %></strong></span>
   <span class="timestamp">
     Posted <%= time_ago_in_words(post.created_at) %> ago.
   </span>
