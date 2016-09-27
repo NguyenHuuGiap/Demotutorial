@@ -1,0 +1,41 @@
+<% provide(:title, "Home") %>
+<% if logged_in? %>
+  <div class="row">
+    <aside class="col-md-4">
+      <section class="user_info">
+        <%= render 'shared/user_info' %>
+      </section>
+      <section class="stats">
+        <%= render 'shared/stats' %>
+      </section>
+
+      <section class="micropost_form">
+        <%= render 'shared/micropost_form' %>
+      </section>
+    </aside>
+        <div class="col-md-8">
+      <h3>Micropost Feed</h3>
+      <%= render 'shared/feed' %>
+    </div>
+
+  </div>
+<% else %>
+
+<div class="col-md-8">
+<ol class="microposts">
+<% @post.each do |post| %>
+<li>
+  <%= link_to gravatar_for(post.user, size: 50), user_path(post.user.id) %>
+  <span class="user"><%= link_to post.user.name, user_path(post.user.id) %></span>
+  <span class="title"><h4>Title: <%= link_to post.title, micropost_path(post.id) %></h4></span>
+  <span class="content"><%= post.content %><strong><%= link_to "READ MORE", micropost_path(post.id) %></strong></span>
+  <span class="comment"><%= post.content %><strong><%= link_to " Comment", micropost_path(post.id) %></strong></span>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(post.created_at) %> ago.
+  </span>
+</li>
+  <% end %>
+  </ol>
+  <%= will_paginate @posts %>
+</div>
+<% end %>

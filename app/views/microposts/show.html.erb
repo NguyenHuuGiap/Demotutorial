@@ -1,0 +1,32 @@
+<li>
+
+<div>
+  <%= link_to gravatar_for(@post.user, size: 50), @post.user %>
+  <span class="user"><%= link_to @post.user.name, @post.user %></span>
+  <span class="title"><h4><%= link_to @post.title, @post %></h4></span>
+
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(@post.created_at) %> ago.
+  </span>
+</div>
+<br>
+ <div class="col-md-8">
+  <ol class="micropost">
+        <%= render @comments %>
+      </ol>
+  </div>
+
+  <% if logged_in? %>
+  <%= form_for(@comment ||= current_user.comments.build) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="field">
+  <%= f.text_area :cmcontent, placeholder: "Compose a comment..." %>
+  <%= f.hidden_field :micropost_id, value: @post.id %>
+  </div>
+  <br>
+  <br>
+  <%= f.submit "Post", class: "btn btn-primary" %>
+<% end %>
+<% end %>
+
+</li>
